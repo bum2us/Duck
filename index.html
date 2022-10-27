@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        //your code...
+        function MySelector() {
+            const [index, setIndex] = React.useState("xx");
+            const ChangeSelector = (event) => {
+                setIndex(event.target.value);
+            }
+            return (
+                <div>
+                    <select value={index} onChange={ChangeSelector}>
+                        <option value="xx" selected>select unit..</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                    <hr />
+                    {index === "xx" ? "Please Select unit.." : null}
+                    {index === "1" ? <Myfunction1 /> : null}
+                    {index === "2" ? <Myfunction2 /> : null}
+                </div>
+            );
+        }
+        function Myfunction1() {
+            const [counter, setCounter] = React.useState(0);
+            const [text, setText] = React.useState();
+            const AddCount = () => {
+                setCounter(current => current + 1);
+            };
+            const ChangeText = (event) => {
+                setText(event.target.value);
+            };
+            return (
+                <div>
+                    <h3>Total Count: {counter}</h3>
+                    <input id="write" placeholder="write here..." onChange={ChangeText} />
+                    <h4>write text: {text}</h4>
+                    <button onClick={AddCount} >Click me</button>
+                </div>
+            );
+        };
+        function Myfunction2() {
+            return (
+                <div>
+                    <h2>밸류가 2입니다.</h2>
+                </div>
+            );
+        }
+        function App() {
+            return (
+                <MySelector />
+            );
+        };
+        const root = document.getElementById("root");
+        ReactDOM.render(<App />, root);
+
+    </script>
+
+</body>
+
+</html>
